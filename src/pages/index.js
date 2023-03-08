@@ -1,8 +1,6 @@
 import Head from "next/head";
-import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
-
-const inter = Inter({ subsets: ["latin"] });
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -13,7 +11,47 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}></main>
+      <main className={styles.main}>
+        <header className="p-6">
+          <nav className="flex justify-around text-lg">
+            <Link href="/">Home</Link>
+            <Link href="/events">Events</Link>
+            <Link href="/about">About</Link>
+          </nav>
+        </header>
+
+        <div className="m-3">
+          <a href="">
+            <img />
+            <h2>Events</h2>
+            <p>
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+              Deserunt, animi?
+            </p>
+          </a>
+        </div>
+        <div className="m-3">
+          <a href="">
+            <img />
+            <h2>Events</h2>
+            <p>
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+              Deserunt, animi?
+            </p>
+          </a>
+        </div>
+        <div className="m-3">
+          <a href="">
+            <img />
+            <h2>Events</h2>
+            <p>
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+              Deserunt, animi?
+            </p>
+          </a>
+        </div>
+      </main>
+      <footer className="m-3 text-center">Burak Aydemir Development</footer>
     </>
   );
 }
