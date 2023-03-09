@@ -1,8 +1,9 @@
 import Head from "next/head";
 import styles from "@/styles/Home.module.css";
 import Link from "next/link";
+import Image from "next/image";
 
-export default function Home() {
+export default function Home({ data }) {
   return (
     <>
       <Head>
@@ -20,38 +21,56 @@ export default function Home() {
           </nav>
         </header>
 
-        <div className="m-3">
-          <a href="">
-            <img />
-            <h2>Events</h2>
-            <p>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-              Deserunt, animi?
-            </p>
-          </a>
-        </div>
-        <div className="m-3">
-          <a href="">
-            <img />
-            <h2>Events</h2>
-            <p>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-              Deserunt, animi?
-            </p>
-          </a>
-        </div>
-        <div className="m-3">
-          <a href="">
-            <img />
-            <h2>Events</h2>
-            <p>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-              Deserunt, animi?
-            </p>
-          </a>
-        </div>
+        <h1 className="ml-3">Top 20 Cryptocurrency Prices</h1>
+
+        {data.map((coin) => {
+          const dateUpdated = new Date(coin.last_updated).toLocaleString();
+          const coinPrice = new Intl.NumberFormat("en-US", {
+            style: "currency",
+            currency: "USD",
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 20,
+          }).format(coin.current_price);
+
+          return (
+            <div key={coin.id} className="m-3">
+              <Link href={`/events/${coin.id}`}>
+                <Image
+                  src={coin.image}
+                  alt={coin.name}
+                  width="100"
+                  height="100"
+                />
+                <h2>{coin.name}</h2>
+                <p>{coinPrice}</p>
+                <p>24hr price change: {coin.price_change_24h}</p>
+                <span>last updated: {dateUpdated}</span>
+              </Link>
+            </div>
+          );
+        })}
       </main>
       <footer className="m-3 text-center">Burak Aydemir Development</footer>
     </>
   );
+}
+
+export async function getServerSideProps() {
+  // const data = await import("/data/data.json");
+  const res = await fetch(
+    "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=20&page=1&sparkline=false"
+  );
+  const data = await res.json();
+
+  if (!data) {
+    return {
+      notFound: true,
+    };
+  }
+
+  return {
+    props: {
+      data,
+    },
+  };
 }
