@@ -21,34 +21,48 @@ export default function Home({ data }) {
           </nav>
         </header>
 
-        <h1 className="ml-3">Top 20 Cryptocurrency Prices</h1>
+        <h1 className="ml-3 text-center mt-3 mb-5">
+          Top 20 Cryptocurrencies By Market Cap
+        </h1>
 
-        {data.map((coin) => {
-          const dateUpdated = new Date(coin.last_updated).toLocaleString();
-          const coinPrice = new Intl.NumberFormat("en-US", {
-            style: "currency",
-            currency: "USD",
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 20,
-          }).format(coin.current_price);
+        <div className="flex flex-wrap justify-center m-5 gap-5">
+          {data.map((coin) => {
+            const dateUpdated = new Date(coin.last_updated).toLocaleString();
+            const coinPrice = new Intl.NumberFormat("en-US", {
+              style: "currency",
+              currency: "USD",
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 20,
+            }).format(coin.current_price);
 
-          return (
-            <div key={coin.id} className="m-3">
-              <Link href={`/events/${coin.id}`}>
-                <Image
-                  src={coin.image}
-                  alt={coin.name}
-                  width="100"
-                  height="100"
-                />
-                <h2>{coin.name}</h2>
-                <p>{coinPrice}</p>
-                <p>24hr price change: {coin.price_change_24h}</p>
-                <span>last updated: {dateUpdated}</span>
-              </Link>
-            </div>
-          );
-        })}
+            const coinPriceChange = new Intl.NumberFormat("en-US", {
+              style: "percent",
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            }).format(coin.price_change_percentage_24h / 100);
+
+            return (
+              <div
+                key={coin.id}
+                className="p-3 w-1/4 border-2 rounded-md shadow-sm hover:shadow-lg"
+              >
+                <Link href={`/events/${coin.id}`} className="flex flex-col">
+                  <Image
+                    className="self-center"
+                    src={coin.image}
+                    alt={coin.name}
+                    width="100"
+                    height="100"
+                  />
+                  <h2 className="self-center">{coin.name}</h2>
+                  <p>Price: {coinPrice}</p>
+                  <p>24hr change: {coinPriceChange}</p>
+                  <p>Updated: {dateUpdated}</p>
+                </Link>
+              </div>
+            );
+          })}
+        </div>
       </main>
       <footer className="m-3 text-center">Burak Aydemir Development</footer>
     </>
