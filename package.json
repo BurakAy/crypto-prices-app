@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "watch": "npx tailwindcss -i ./src/styles/globals.css -o ./dist/output.css --watch",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
