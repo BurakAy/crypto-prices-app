@@ -211,7 +211,7 @@ const Coin = ({
         </h1>
       </div>
 
-      <div className="line-chart"></div>
+      <div className="line-chart flex justify-center"></div>
     </div>
   );
 };
