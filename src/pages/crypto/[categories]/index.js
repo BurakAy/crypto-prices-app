@@ -7,7 +7,18 @@ const CryptoCategories = ({ data, coinCategory }) => {
       <h1 className="text-center mt-3 mb-5">{coinCategory.toUpperCase()}</h1>
       <div className="flex flex-wrap justify-center m-5 gap-5">
         {data.map((coin) => {
-          const dateUpdated = new Date(coin.last_updated).toLocaleString();
+          const dateTime = new Date(coin.last_updated);
+          const dateUpdated = new Intl.DateTimeFormat("en-US", {
+            year: "numeric",
+            month: "numeric",
+            day: "numeric",
+            hour: "numeric",
+            minute: "numeric",
+            second: "numeric",
+            hour12: false,
+            timeZone: "America/New_York",
+            timeZoneName: "short",
+          }).format(dateTime);
           const coinPrice = new Intl.NumberFormat("en-US", {
             style: "currency",
             currency: "USD",
