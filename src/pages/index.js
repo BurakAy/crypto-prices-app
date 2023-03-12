@@ -13,21 +13,24 @@ export default function Home({ data }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <header className="p-6">
-          <nav className="flex justify-around text-lg">
-            <Link href="/">Home</Link>
-            <Link href="/crypto">Crypto Categories</Link>
-            <Link href="/about">About</Link>
-          </nav>
-        </header>
-
         <h1 className="text-center mt-3 mb-5">
           Top 20 Cryptocurrencies By Market Cap
         </h1>
 
         <div className="flex flex-wrap justify-center m-5 gap-5">
           {data.map((coin) => {
-            const dateUpdated = new Date(coin.last_updated).toLocaleString();
+            const dateTime = new Date(coin.last_updated);
+            const dateUpdated = new Intl.DateTimeFormat("en-US", {
+              year: "numeric",
+              month: "numeric",
+              day: "numeric",
+              hour: "numeric",
+              minute: "numeric",
+              second: "numeric",
+              hour12: false,
+              timeZone: "America/New_York",
+              timeZoneName: "short",
+            }).format(dateTime);
             const coinPrice = new Intl.NumberFormat("en-US", {
               style: "currency",
               currency: "USD",
