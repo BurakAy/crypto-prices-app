@@ -1,6 +1,6 @@
 import Image from "next/image";
 import * as d3 from "d3";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Coin = ({
   id,
@@ -15,17 +15,19 @@ const Coin = ({
   percentChange,
   pdata,
 }) => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [prices, setPrices] = useState(pdata.prices);
 
-  const chart = LineChart(pdata.prices, {
-    x: (d) => d[0],
-    y: (d) => d[1],
-    width: 640,
-    height: 500,
-    color: "steelblue",
-  });
+  useEffect(() => {
+    const chart = LineChart(prices, {
+      x: (d) => d[0],
+      y: (d) => d[1],
+      width: 640,
+      height: 500,
+      color: "steelblue",
+    });
 
-  document.querySelector(".line-chart").append(chart);
+    document.querySelector(".line-chart").appendChild(chart);
+  }, [prices]);
 
   function LineChart(
     data,
