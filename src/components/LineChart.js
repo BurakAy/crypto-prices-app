@@ -10,7 +10,7 @@ const LineChart = (props) => {
       y: (d) => d[1],
       width: 640,
       height: 500,
-      color: "steelblue",
+      color: "green",
     });
 
     document.querySelector(".line-chart").appendChild(chart);
@@ -37,10 +37,10 @@ const LineChart = (props) => {
       yDomain, // [ymin, ymax]
       yRange = [height - marginBottom, marginTop], // [bottom, top]
       color = "currentColor", // stroke color of line
-      strokeWidth = 1.5, // stroke width of line, in pixels
+      strokeWidth = 1.75, // stroke width of line, in pixels
       strokeLinejoin = "round", // stroke line join of line
       strokeLinecap = "round", // stroke line cap of line
-      yFormat, // a format specifier string for the y-axis
+      yFormat = ["$", "f"], // a format specifier string for the y-axis
       yLabel, // a label for the y-axis
     } = {}
   ) {
@@ -63,9 +63,9 @@ const LineChart = (props) => {
     const yScale = yType(yDomain, yRange);
     const xAxis = d3
       .axisBottom(xScale)
-      .ticks(width / 80)
+      .ticks(width / 40)
       .tickSizeOuter(0);
-    const yAxis = d3.axisLeft(yScale).ticks(height / 40, yFormat);
+    const yAxis = d3.axisLeft(yScale).ticks(height / 20, yFormat);
 
     // Compute titles.
     if (title === undefined) {
@@ -182,7 +182,11 @@ const LineChart = (props) => {
 
     return Object.assign(svg.node(), { value: null });
   }
-  return <div className="line-chart flex justify-center"></div>;
+  return (
+    <div className="line-chart flex flex-col justify-center items-center m-5">
+      <h2 className="self-start">7 day price chart</h2>
+    </div>
+  );
 };
 
 export default LineChart;
