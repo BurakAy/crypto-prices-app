@@ -40,7 +40,7 @@ const LineChart = (props) => {
       strokeWidth = 1.75, // stroke width of line, in pixels
       strokeLinejoin = "round", // stroke line join of line
       strokeLinecap = "round", // stroke line cap of line
-      yFormat = ["$", "f"], // a format specifier string for the y-axis
+      yFormat = ["$", ".2f"], // a format specifier string for the y-axis
       yLabel, // a label for the y-axis
     } = {}
   ) {
@@ -70,8 +70,10 @@ const LineChart = (props) => {
     // Compute titles.
     if (title === undefined) {
       const formatDate = xScale.tickFormat(null, "%b %-d, %Y");
+      const formatTime = xScale.tickFormat(null, "%I:%M %p");
       const formatValue = yScale.tickFormat(100, yFormat);
-      title = (i) => `${formatDate(X[i])}\n${formatValue(Y[i])}`;
+      title = (i) =>
+        `${formatDate(X[i])}\n${formatTime(X[i])}\n${formatValue(Y[i])}`;
     } else {
       const O = d3.map(data, (d) => d);
       const T = title;
