@@ -1,13 +1,12 @@
-import Nav from "@/components/Nav";
-import Footer from "@/components/Footer";
+import MainLayout from "@/components/MainLayout";
 import "../../dist/output.css";
 
 export default function App({ Component, pageProps }) {
   return (
     <>
-      <Nav />
-      <Component {...pageProps} />
-      <Footer />
+      <MainLayout>
+        <Component {...pageProps} />
+      </MainLayout>
     </>
   );
 }
