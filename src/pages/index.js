@@ -11,8 +11,9 @@ export default function HomePage({ data }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}></main>
-      <Home data={data} />
+      <main className={styles.main}>
+        <Home data={data} />
+      </main>
     </>
   );
 }
