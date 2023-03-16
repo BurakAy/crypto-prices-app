@@ -54,6 +54,7 @@ const CategoriesCoins = ({ data, coinCategory }) => {
                 <p>24hr: {coinPriceChange}</p>
                 <p>Updated: {dateUpdated}</p>
               </Link>
+              <button>Add to watchlist</button>
             </div>
           );
         })}
