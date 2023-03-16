@@ -30,7 +30,7 @@ const LineChart = (props) => {
       marginLeft = 40, // left margin, in pixels
       width = 640, // outer width, in pixels
       height = 400, // outer height, in pixels
-      xType = d3.scaleUtc, // type of x-scale
+      xType = d3.scaleTime, // type of x-scale
       xDomain, // [xmin, xmax]
       xRange = [marginLeft, width - marginRight], // [left, right]
       yType = d3.scaleLinear, // type of y-scale
@@ -70,7 +70,7 @@ const LineChart = (props) => {
     // Compute titles.
     if (title === undefined) {
       const formatDate = xScale.tickFormat(null, "%b %-d, %Y");
-      const formatTime = xScale.tickFormat(null, "%I:%M %p");
+      const formatTime = xScale.tickFormat(null, "%-I:%M %p");
       const formatValue = yScale.tickFormat(100, yFormat);
       title = (i) =>
         `${formatDate(X[i])}\n${formatTime(X[i])}\n${formatValue(Y[i])}`;
@@ -186,7 +186,7 @@ const LineChart = (props) => {
   }
   return (
     <div className="line-chart flex flex-col justify-center items-center m-5">
-      <h2 className="self-start">7 day price chart</h2>
+      <h2 className="self-start ml-24">7 day price chart</h2>
     </div>
   );
 };
