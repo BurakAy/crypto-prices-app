@@ -2,6 +2,23 @@ import Link from "next/link";
 import Image from "next/image";
 
 const Home = ({ data }) => {
+  const handleAddToWatchlist = async (coin) => {
+    try {
+      const response = await fetch("/api/watchlist-add", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ coin: coin }),
+      });
+
+      if (!response.ok) throw new Error(`Error: ${response.status}`);
+      const data = await response.json();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <h1 className="text-center mt-3 mb-5">
@@ -54,6 +71,13 @@ const Home = ({ data }) => {
                 <p>24hr: {coinPriceChange}</p>
                 <p>Updated: {dateUpdated}</p>
               </Link>
+              <button
+                data-coin={coin.id}
+                onClick={() => handleAddToWatchlist(coin.id)}
+                className="mt-2 p-1 border-2 rounded-md"
+              >
+                Add to watchlist
+              </button>
             </div>
           );
         })}
