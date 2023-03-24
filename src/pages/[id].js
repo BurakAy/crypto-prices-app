@@ -13,7 +13,7 @@ export default Coin;
 export async function getServerSideProps(context) {
   const coinID = context?.params.id;
   const res = await fetch(
-    `https://api.coingecko.com/api/v3/coins/${coinID}?community_data=false&developer_data=false&sparkline=true`
+    `https://api.coingecko.com/api/v3/coins/${coinID}?community_data=false&developer_data=false`
   );
   const data = await res.json();
 
