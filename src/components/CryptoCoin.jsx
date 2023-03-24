@@ -1,5 +1,6 @@
 import Image from "next/image";
 import LineChart from "./LineChart";
+import DataTable from "./DataTable";
 
 const CryptoCoin = ({ coinData, pdata }) => {
   return (
@@ -18,6 +19,8 @@ const CryptoCoin = ({ coinData, pdata }) => {
       </div>
 
       <LineChart coinPrices={pdata} />
+
+      <DataTable coinData={coinData} />
     </div>
   );
 };
