@@ -1,3 +1,12 @@
+# About
+See the app in action: https://charming-fudge-fb8521.netlify.app/
+
+Fetching and displaying crypto prices using the CoinGecko API
+
+Charts on crypto pages created using D3.js
+
+---
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
